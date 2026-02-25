@@ -24,15 +24,15 @@ Parking Céntrico 24/7 is a desktop application that handles the complete operat
 - Swing
 - Serialization
 - JDatePicker
-
+  
 ## How to run
 
-Download `ParkingCentrico24_7_FAT.jar` from the Ejecutable folder and run:
+Requires Java 24 or higher. Download `ParkingCentrico24_7_FAT.jar` from the Releases section and run:
 ```bash
 java -jar ParkingCentrico24_7_FAT.jar
 ```
-
 ## Authors
 
 - Nyah Rüting — Electronic Engineering, ORT Uruguay
 - Facundo Esquivel — Systems Engineering, ORT Uruguay
+
