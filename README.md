@@ -38,17 +38,22 @@ The project follows **MVC (Model-View-Controller)**:
 
 ```
 src/
-├── modelo/          # Domain classes: Cliente, Empleado, Vehiculo, Contrato,
-│                    #   Movimiento, Entrada, Salida, ServicioAdicional, Sistema
-├── vista/           # Swing UI panels for each module
-└── controlador/     # Event handling and business logic bridges
+├── dominio/                    # Domain model: Cliente, Empleado, Vehiculo,
+│                               #   Contrato, Movimiento, Entrada, Salida,
+│                               #   ServicioAdicional, Sistema
+├── interfaz/                   # Swing UI — one panel per module
+└── parkingcentrico24_7/
+    ├── Main.java               # Entry point
+    ├── GestorSistema.java      # Persistence layer — serializes/deserializes
+    │                           #   full system state to disk
+    └── MiniJuego.java          # Built-in mini game
 ```
 
 **Key OOP decisions:**
 - `Persona` is an abstract base class extended by `Cliente` and `Empleado`
 - `Movimiento` is an abstract class extended by `Entrada` and `Salida`
 - `Sistema` acts as the central model holding all entity lists and exposing the full business logic API
-- All state is serialized to disk — no database, no external dependencies beyond `JDatePicker`
+- `GestorSistema` handles all I/O — the rest of the app never touches the file system directly
 
 See the full UML class diagram in `screenshots/uml.png`.
 
