@@ -59,6 +59,7 @@ See the full UML class diagram in `screenshots/uml.png`.
 
 ---
 
+
 ## Tech Stack
 
 | | |
@@ -87,7 +88,7 @@ No installation needed. Data is saved automatically to a local file on exit.
 
 ## Authors
 
-- **Nyah Rüting** — [github.com/nyah-R](https://github.com/nyah-R)
+- **Nyah Rüting** 
 - **Facundo Esquivel**
 
 ORT Uruguay — Electronic Engineering / Systems Engineering
