@@ -1,94 +1,90 @@
 # Parking Céntrico 24/7
 
-A full-featured desktop parking management system built in Java. Handles the complete operation of a parking lot: clients, employees, vehicles, entries/exits, monthly contracts, and additional services — with a reports module and persistent data storage.
+Sistema de gestión de estacionamiento desarrollado en **Java**. Permite gestionar la operación completa de un estacionamiento: clientes, empleados, vehículos, entradas y salidas, contratos mensuales y servicios adicionales, además de contar con un módulo de reportes y persistencia de datos.
 
-> Built as a group project for **Programming 2** — ORT Uruguay. Demonstrates MVC architecture, OOP design with inheritance and polymorphism, and file-based persistence via Java serialization.
+> Proyecto grupal realizado para **Programación 2** (2° semestre) Ingeniería Electrónica - ORT Uruguay. 
 
 ---
 
 ## Screenshots
 
-| Client & Vehicle Management | Additional Services |
+| Gestión de clientes y vehículos | Servicios adicionales  |
 |---|---|
 | ![Client and vehicle panels](screenshots/clients-vehicles.png) | ![Additional services panel](screenshots/services.png) |
 
-| Employee Management | UML Class Diagram |
+| Gestión de empleados | Diagrama de clases UML |
 |---|---|
 | ![Employee panel](screenshots/employees.png) | ![UML diagram](screenshots/uml.png) |
 
 ---
 
-## Features
+## Funcionalidades
 
-- **Client management** — register, edit, and delete clients with ID (cédula) validation
-- **Employee management** — register employees, track movement count per employee
-- **Vehicle management** — register vehicles with plate, brand, model, and status tracking
-- **Entries & exits** — record vehicle entries with timestamp, notes, and assigned employee; close exits with duration calculation and vehicle condition comments
-- **Monthly contracts** — link contracts to clients and vehicles with a monthly price
-- **Additional services** — register car wash, tire change, interior cleaning, and light replacement per vehicle, with cost tracking
-- **Reports module** — movement history by date range, top clients by vehicle count, employees with least activity, longest stays
-- **Dark / light theme** — toggle between themes, persisted across sessions
-- **Data persistence** — full state saved via Java object serialization (no external database required)
+- **Clientes**: registro, edición y eliminación con validación de cédula
+- **Empleados**: registro y seguimiento de movimientos
+- **Vehículos**: registro y seguimiento de estado
+- **Entradas y salidas**: registro de movimientos, duración y observaciones
+- **Contratos mensuales**: asociación de contratos con clientes y vehículos
+- **Servicios adicionales**: registro y seguimiento de costos
+- **Reportes**: movimientos, clientes, empleados y estadías
+- **Tema oscuro / claro**: configuración persistente entre sesiones
+- **Persistencia**: almacenamiento mediante serialización de objetos de Java
+  
+---
+
+## Arquitectura
+
+El proyecto implementa una arquitectura **MVC (Model-View-Controller)**:
+
+    src/
+    ├── dominio/                    # Modelo de dominio: Cliente, Empleado, Vehiculo,
+    │                               #   Contrato, Movimiento, Entrada, Salida,
+    │                               #   ServicioAdicional, Sistema
+    ├── interfaz/                   # Interfaz gráfica Swing - un panel por módulo
+    └── parkingcentrico24_7/
+        ├── Main.java               # Punto de entrada
+        ├── GestorSistema.java      # Capa de persistencia - serializa/deserializa
+        │                           #   el estado completo del sistema en disco
+        └── MiniJuego.java          # Minijuego integrado
+
+**Decisiones principales de POO:**
+
+- `Persona` es una clase abstracta extendida por `Cliente` y `Empleado`.
+- `Movimiento` es una clase abstracta extendida por `Entrada` y `Salida`.
+- `Sistema` actúa como modelo central, almacenando las listas de entidades y exponiendo la lógica de negocio del sistema.
+- `GestorSistema` gestiona todas las operaciones de entrada/salida; el resto de la aplicación no accede directamente al sistema de archivos.
+
+El diagrama completo de clases UML se encuentra en `screenshots/uml.png`.
 
 ---
 
-## Architecture
+## Tecnologías
 
-The project follows **MVC (Model-View-Controller)**:
-
-```
-src/
-├── dominio/                    # Domain model: Cliente, Empleado, Vehiculo,
-│                               #   Contrato, Movimiento, Entrada, Salida,
-│                               #   ServicioAdicional, Sistema
-├── interfaz/                   # Swing UI — one panel per module
-└── parkingcentrico24_7/
-    ├── Main.java               # Entry point
-    ├── GestorSistema.java      # Persistence layer — serializes/deserializes
-    │                           #   full system state to disk
-    └── MiniJuego.java          # Built-in mini game
-```
-
-**Key OOP decisions:**
-- `Persona` is an abstract base class extended by `Cliente` and `Empleado`
-- `Movimiento` is an abstract class extended by `Entrada` and `Salida`
-- `Sistema` acts as the central model holding all entity lists and exposing the full business logic API
-- `GestorSistema` handles all I/O — the rest of the app never touches the file system directly
-
-See the full UML class diagram in `screenshots/uml.png`.
-
----
-
-
-## Tech Stack
-
-| | |
+| Tecnología | Uso |
 |---|---|
-| Language | Java 24 |
-| UI | Swing |
-| Persistence | Java Serialization |
-| Date picker | JDatePicker |
-| Build | Apache Ant (`build.xml`) |
+| **Java 24** | Lenguaje de programación |
+| **Swing** | Interfaz gráfica |
+| **Java Serialization** | Persistencia de datos |
+| **JDatePicker** | Selector de fechas |
+| **Apache Ant** | Sistema de construcción (`build.xml`) |
 
 ---
 
-## How to Run
+## Cómo ejecutar
 
-**Requirements:** Java 24 or higher
+**Requisito:** Java 24 o superior.
 
-Download `ParkingCentrico24_7_FAT.jar` from [Releases](../../releases) and run:
+Descargar `ParkingCentrico24_7_FAT.jar` desde [Releases](../../releases) y ejecutar:
 
-```bash
-java -jar ParkingCentrico24_7_FAT.jar
-```
+    java -jar ParkingCentrico24_7_FAT.jar
 
-No installation needed. Data is saved automatically to a local file on exit.
+No requiere instalación. Los datos se guardan automáticamente en un archivo local al salir de la aplicación.
 
 ---
 
-## Authors
+## Autores
 
-- **Nyah Rüting** 
+- **Nyah Rüting**
 - **Facundo Esquivel**
 
-ORT Uruguay — Electronic Engineering / Systems Engineering
+ORT Uruguay - Ingeniería Electrónica / Ingeniería de Sistemas
